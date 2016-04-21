@@ -1,0 +1,32 @@
+<recipe>
+    <recipeName>Breaded Shrimp</recipeName>
+    <ingredients>
+        <i>
+            <n>Vegetable Oil</n>
+            <q>1</q>
+            <u>Quart</u>
+        </i>
+        <i>
+            <n>Shrimp</n>
+            <q>4</q>
+            <u>Cup</u>
+        </i>
+        <i>
+            <n>Egg</n>
+            <q>1</q>
+            <u></u>
+        </i>
+        <i>
+            <n>Bread Crumbs</n>
+            <q>2</q>
+            <u>Cup</u>
+        </i>
+    </ingredients>
+    <directions>
+        <d>Heat oil in large skillet.</d>
+        <d>Whisk egg in bowl.</d>
+        <d>Dip shrimp in egg.</d>
+        <d>Coat shrimp in bread crumbs.</d>
+        <d>Fry shrimp in hot oil.</d>
+    </directions>
+</recipe>

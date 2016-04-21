@@ -1,0 +1,39 @@
+<recipe>
+    <recipeName>Fried Cheese Stick</recipeName>
+    <ingredients>
+        <i>
+            <n>String Cheese</n>
+            <q>24</q>
+            <u>Ounce</u>
+        </i>
+        <i>
+            <n>Vegetable Oil</n>
+            <q>1</q>
+            <u>Quart</u>
+        </i>
+        <i>
+            <n>Egg</n>
+            <q>5</q>
+            <u></u>
+        </i>
+        <i>
+            <n>Bread Crumbs</n>
+            <q>3</q>
+            <u>Cup</u>
+        </i>
+    </ingredients>
+    <directions>
+        <d>Cut string cheese in half crosswise.</d>
+        <d>Line baking sheet with parchment paper.</d>
+        <d>Place eggs in bowl and whisk.</d>
+        <d>Place bread crumbs into large shallow bowl.</d>
+        <d>Dip cheese stick halves into egg and roll in bread crumbs to completely coat sticks.</d>
+        <d>Place breaded cheese sticks onto prepared baking sheet.</d>
+        <d>Allow cheese sticks to stand at room temperature for about 5 minutes to set.</d>
+        <d>Repeat dipping in egg and bread crumbs to form a thick coating.</d>
+        <d>Freeze breaded cheese sticks for at least 2 hours.</d>
+        <d>Heat oil in a deep-fryer or large saucepan to 350 degrees F.</d>
+        <d>Deep fry cheese sticks until coating is golden brown and crisp and cheese is soft, 5 to 8 minutes.</d>
+        <d>Let sticks drain on paper towels; cool slightly and serve warm.</d>
+    </directions>
+</recipe>
