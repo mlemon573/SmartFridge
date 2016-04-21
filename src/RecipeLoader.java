@@ -32,15 +32,18 @@ public class RecipeLoader
       StringBuilder sb = new StringBuilder();
       while (in.hasNextLine()) {sb.append(in.nextLine());}
       String recipeText = sb.toString();
-      if (isRecipe(recipeText))
+      if (matchesRegex("recipe", recipeText))
       {
-         newRecipe.setName(getRecipeName(recipeText));
-         for (String s : getIngredientList(getIngredients(recipeText)))
+         newRecipe.setName(getRegex("recipeName", recipeText));
+         for (String s : getRegexList("i", getRegex("ingredients", recipeText)))
          {
-            newRecipe.addIngredient(getIngredient(s));
-            newRecipe.addAmount(getIngredientAmount(s));
+            newRecipe.addIngredient(new Ingredient(getRegex("n", s)));
+
+            double quantity = Double.parseDouble(getRegex("q", s));
+            String unit = getRegex("u", s);
+            newRecipe.addAmount(new IngredientAmount(quantity, unit));
          }
-         for (String s : getDirectionList(getDirections(recipeText)))
+         for (String s : getRegexList("d", getRegex("directions", recipeText)))
          {
             newRecipe.addDirection(s);
          }
@@ -53,70 +56,32 @@ public class RecipeLoader
       return directory;
    }
 
-   private boolean isRecipe(String s)
+   private Matcher getMatcher(String tag, String searchText)
    {
-      Pattern p = Pattern.compile("<recipe>([\\s\\S]*?)</recipe>");
-      Matcher m = p.matcher(s);
+      String formattedPattern =
+            String.format("<%s>([\\s\\S]*?)</%s>", tag, tag);
+      Pattern pattern = Pattern.compile(formattedPattern);
+      return pattern.matcher(searchText);
+   }
+
+   private boolean matchesRegex(String tag, String searchText)
+   {
+      Matcher m = getMatcher(tag, searchText);
       return m.matches();
    }
 
-   private String getRecipeName(String s)
+   private List<String> getRegexList(String tag, String searchText)
    {
-      Pattern p = Pattern.compile("<recipeName>([\\s\\S]*?)</recipeName>");
-      Matcher m = p.matcher(s);
-      m.find();
-      return m.group(1);
+      Matcher m = getMatcher(tag, searchText);
+      List<String> regexList = new ArrayList<>();
+      while (m.find()) {regexList.add(m.group(1));}
+      return regexList;
    }
 
-   private String getIngredients(String s)
+   private String getRegex(String tag, String searchText)
    {
-      Pattern p = Pattern.compile("<ingredients>([\\s\\S]*?)</ingredients>");
-      Matcher m = p.matcher(s);
-      m.find();
-      return m.group(1);
-   }
-
-   private List<String> getIngredientList(String s)
-   {
-      Pattern p = Pattern.compile("<i>([\\s\\S]*?)</i>");
-      Matcher m = p.matcher(s);
-      List<String> ingredientList = new ArrayList<>();
-      while (m.find()) {ingredientList.add(m.group(1));}
-      return ingredientList;
-   }
-
-   private Ingredient getIngredient(String s)
-   {
-      Pattern p = Pattern.compile("<n>([\\s\\S]*?)</n>");
-      Matcher m = p.matcher(s);
-      m.find();
-      return new Ingredient(m.group(1));
-   }
-
-   private IngredientAmount getIngredientAmount(String s) throws
-         NumberFormatException
-   {
-      Pattern p =
-            Pattern.compile("<q>([\\s\\S]*?)</q>[\\s\\S]*?<u>([\\s\\S]*?)</u>");
-      Matcher m = p.matcher(s);
-      m.find();
-      return new IngredientAmount(Double.parseDouble(m.group(1)), m.group(2));
-   }
-
-   private String getDirections(String s)
-   {
-      Pattern p = Pattern.compile("<directions>([\\s\\S]*?)</directions>");
-      Matcher m = p.matcher(s);
-      m.find();
-      return m.group(1);
-   }
-
-   private List<String> getDirectionList(String s)
-   {
-      Pattern p = Pattern.compile("<d>([\\s\\S]*?)</d>");
-      Matcher m = p.matcher(s);
-      List<String> directionList = new ArrayList<>();
-      while (m.find()) {directionList.add(m.group(1));}
-      return directionList;
+      Matcher m = getMatcher(tag, searchText);
+      if (m.find()) {return m.group(1);}
+      else {return "";}
    }
 }
