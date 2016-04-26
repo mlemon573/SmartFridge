@@ -1,0 +1,38 @@
+<recipe>
+    <recipeName>Cheesy Garlic Bread</recipeName>
+    <ingredients>
+        <i>
+            <n>French Bread</n>
+            <q>8</q>
+            <u>Ounce</u>
+        </i>
+        <i>
+            <n>Parmesan Cheese</n>
+            <q>.33</q>
+            <u>Cup</u>
+        </i>
+        <i>
+            <n>Butter</n>
+            <q>.5</q>
+            <u>Cup</u>
+        </i>
+        <i>
+            <n>Garlic Powder</n>
+            <q>2</q>
+            <u>Tablespoon</u>
+        </i>
+        <i>
+            <n>Dried Parsley</n>
+            <q>1</q>
+            <u>Teaspoon</u>
+        </i>
+    </ingredients>
+    <directions>
+        <d>Preheat oven to 375 degrees F.</d>
+        <d>Cut bread into 1-inch thick slices, without cutting all the way through the loaf.</d>
+        <d>Mix Parmesan cheese, butter, garlic powder, and parsley in a small bowl.</d>
+        <d>Spread mixture between slices of bread and over the top of the loaf.</d>
+        <d>Wrap loaf in aluminum foil, leaving the top partially uncovered.</d>
+        <d>Bake in preheated oven until butter is melted and bread toasted; about 15 to 20 minutes.</d>
+    </directions>
+</recipe>

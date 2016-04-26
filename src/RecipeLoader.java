@@ -1,12 +1,21 @@
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 public class RecipeLoader
 {
    private Set<Recipe> directory;
+   private DocumentBuilder docBuilder;
 
    public static void main(String[] args)
    {
@@ -15,6 +24,9 @@ public class RecipeLoader
 
    public RecipeLoader(String path)
    {
+      DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+      try {docBuilder = dbf.newDocumentBuilder();}
+      catch (ParserConfigurationException e) {e.printStackTrace();}
       directory = new HashSet<>();
       File[] listFiles = new File(path).listFiles();
       if (listFiles == null) {return;}
@@ -24,64 +36,60 @@ public class RecipeLoader
       }
    }
 
-   private void parseRecipe(File input) throws FileNotFoundException,
-         NumberFormatException
+   private void parseRecipe(File input) throws NumberFormatException,
+         SAXException, IOException
    {
       Recipe newRecipe = new Recipe();
-      Scanner in = new Scanner(input);
-      StringBuilder sb = new StringBuilder();
-      while (in.hasNextLine()) {sb.append(in.nextLine());}
-      String recipeText = sb.toString();
-      if (matchesRegex("recipe", recipeText))
+      Document doc = docBuilder.parse(input);
+      doc.getDocumentElement().normalize();
+      if ("recipe".equals(doc.getDocumentElement().getNodeName()))
       {
-         newRecipe.setName(getRegex("recipeName", recipeText));
-         for (String s : getRegexList("i", getRegex("ingredients", recipeText)))
-         {
-            newRecipe.addIngredient(new Ingredient(getRegex("n", s)));
+         NodeList nList;
+         Node nNode, pNode;
+         Element eElement;
 
-            double quantity = Double.parseDouble(getRegex("q", s));
-            String unit = getRegex("u", s);
-            newRecipe.addAmount(new IngredientAmount(quantity, unit));
-         }
-         for (String s : getRegexList("d", getRegex("directions", recipeText)))
+         pNode = doc.getElementsByTagName("recipeName").item(0);
+         String name = pNode.getTextContent();
+         newRecipe.setName(name);
+
+         pNode = doc.getElementsByTagName("ingredients").item(0);
+         if (pNode.getNodeType() == Node.ELEMENT_NODE)
          {
-            newRecipe.addDirection(s);
+            nList = ((Element) pNode).getElementsByTagName("i");
+            for (int i = 0; i < nList.getLength(); i++)
+            {
+               nNode = nList.item(i);
+               if (nNode.getNodeType() != Node.ELEMENT_NODE) {continue;}
+               eElement = (Element) nNode;
+               String ingredient =
+                     eElement.getElementsByTagName("n").item(0).getTextContent();
+               String quantityText =
+                     eElement.getElementsByTagName("q").item(0).getTextContent();
+               String unit =
+                     eElement.getElementsByTagName("u").item(0).getTextContent();
+               double quantity = Double.parseDouble(quantityText);
+               newRecipe.addIngredient(new Ingredient(ingredient));
+               newRecipe.addAmount(new IngredientAmount(quantity, unit));
+            }
          }
+
+         pNode = doc.getElementsByTagName("directions").item(0);
+         if (pNode.getNodeType() == Node.ELEMENT_NODE)
+         {
+            nList = ((Element) pNode).getElementsByTagName("d");
+            for (int i = 0; i < nList.getLength(); i++)
+            {
+               String direction = nList.item(i).getTextContent();
+               newRecipe.addDirection(direction);
+            }
+         }
+
+         directory.add(newRecipe);
       }
-      directory.add(newRecipe);
    }
 
    public Set<Recipe> getDirectory()
    {
       return directory;
-   }
-
-   private Matcher getMatcher(String tag, String searchText)
-   {
-      String formattedPattern =
-            String.format("<%s>([\\s\\S]*?)</%s>", tag, tag);
-      Pattern pattern = Pattern.compile(formattedPattern);
-      return pattern.matcher(searchText);
-   }
-
-   private boolean matchesRegex(String tag, String searchText)
-   {
-      Matcher m = getMatcher(tag, searchText);
-      return m.matches();
-   }
-
-   private List<String> getRegexList(String tag, String searchText)
-   {
-      Matcher m = getMatcher(tag, searchText);
-      List<String> regexList = new ArrayList<>();
-      while (m.find()) {regexList.add(m.group(1));}
-      return regexList;
-   }
-
-   private String getRegex(String tag, String searchText)
-   {
-      Matcher m = getMatcher(tag, searchText);
-      if (m.find()) {return m.group(1);}
-      else {return "";}
    }
 }
