@@ -3,12 +3,12 @@ public class IngredientAmount
    private double quantity;
    private String unit;
 
-   private final String[] VOLUME_MEASUREMENTS = {
+   private static final String[] VOLUME_MEASUREMENTS = {
          "MILLILITER", "TEASPOON", "TABLESPOON", "OUNCE", "CUP", "PINT", "QUART",
          "LITER", "GALLON"
    };
 
-   private final double[] VOLUME_CONVERSIONS =
+   private static final double[] VOLUME_CONVERSIONS =
          {1, 4.929, 14.787, 29.574, 240, 473.176, 946.353, 1000, 3785.41};
 
    public IngredientAmount(double quantity, String unit)
@@ -29,7 +29,7 @@ public class IngredientAmount
    }
 
    /**
-    * Converts units from whatever it comes in as, to a "prettier" format
+    * Converts units from whatever it comes in as to a "prettier" format
     * Prefers numbers less than 5 and greater than or equal to 1 (rounds to .25)
     * Ignores "Ounces" bc it is ambiguous if it refers to volume or mass
     * If unsuccessful, changes nothing

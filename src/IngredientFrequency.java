@@ -2,7 +2,7 @@ import java.util.*;
 
 public class IngredientFrequency
 {
-   public static Map<Integer, Set<Ingredient>> sort(List<Recipe> recipeList)
+   public static Map<Integer, Set<Ingredient>> getSortedMap(List<Recipe> recipeList)
    {
       Map<Ingredient, Integer> ingredientFrequencyMap = new TreeMap<>();
       for (Recipe r : recipeList)

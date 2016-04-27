@@ -1,0 +1,38 @@
+<recipe>
+    <recipeName>Street Style Corn on the Cob</recipeName>
+    <ingredients>
+        <i>
+            <n>Corn</n>
+            <q>4</q>
+            <u></u>
+        </i>
+        <i>
+            <n>Mayonnaise</n>
+            <q>.25</q>
+            <u>Cup</u>
+        </i>
+        <i>
+            <n>Butter</n>
+            <q>.25</q>
+            <u>Cup</u>
+        </i>
+        <i>
+            <n>Parmesan Cheese</n>
+            <q>.25</q>
+            <u>Cup</u>
+        </i>
+        <i>
+            <n>Chili Powder</n>
+            <q>1</q>
+            <u>Teaspoon</u>
+        </i>
+    </ingredients>
+    <directions>
+        <d>Bring a large pot of water to a boil and gently place ears of corn into the boiling water.</d>
+        <d>Reduce heat to low and simmer until corn is very tender, 20 to 25 minutes.</d>
+        <d>Remove an ear of corn with tongs and spread about 1 tablespoon of butter over the ear of corn.</d>
+        <d>Next spread about 1 tablespoon of mayonnaise all over the kernels.</d>
+        <d>Generously sprinkle Parmesan cheese over the ear and dust with chili powder.</d>
+        <d>Repeat with remaining ears of corn.</d>
+    </directions>
+</recipe>

@@ -9,6 +9,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,14 +24,41 @@ public class RecipeLoader
    public static void main(String[] args)
    {
       RecipeLoader recipeLoader = new RecipeLoader("recipes");
+      List<Recipe> recipeList = recipeLoader.getDirectory();
       Map<Integer, Set<Ingredient>> sortedMap =
-            IngredientFrequency.sort(recipeLoader.getDirectory());
+            IngredientFrequency.getSortedMap(recipeList);
+      System.out.println("Ingredients:");
+      System.out.println("------------------------");
+      System.out.println();
       for (Integer freq : sortedMap.keySet())
       {
          for (Ingredient ing : sortedMap.get(freq))
          {
-            System.out.printf("%s: %d\n", ing.getName(), freq);
+            System.out.printf("%-4d %s\n", freq, ing.getName());
          }
+      }
+
+      System.out.println("\n\nRecipes:");
+      System.out.println("------------------------");
+      for (Recipe r : recipeList)
+      {
+         System.out.println();
+         System.out.println("Recipe:");
+         System.out.printf("%s%n", r.getName());
+         System.out.println("Ingredients:");
+         Map<Ingredient, IngredientAmount> ingredientMap = r.getIngredientMap();
+         for (Ingredient i : ingredientMap.keySet())
+         {
+            IngredientAmount ia = ingredientMap.get(i);
+            NumberFormat nf = new DecimalFormat("#.##");
+            System.out.printf("%-6s%-12s%s%n", nf.format(ia.getQuantity()), ia
+                  .getUnit(), i.getName());
+         }
+         System.out.println("Directions:");
+         List<String> directions = r.getDirections();
+         for (int i = 1; i <= directions.size(); i++)
+         {System.out.printf("%-6s%s%n", i + ")", directions.get(i - 1));}
+         System.out.println("------------------------");
       }
    }
 

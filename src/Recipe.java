@@ -4,12 +4,12 @@ public class Recipe
 {
    private String name;
    private List<String> directions;
-   private Map<Ingredient, IngredientAmount> pairMap;
+   private Map<Ingredient, IngredientAmount> ingredients;
 
    public Recipe()
    {
       directions = new ArrayList<>();
-      pairMap = new TreeMap<>();
+      ingredients = new TreeMap<>();
    }
 
    public String getName()
@@ -24,12 +24,17 @@ public class Recipe
 
    public Set<Ingredient> getIngredients()
    {
-      return pairMap.keySet();
+      return ingredients.keySet();
    }
 
    public Collection<IngredientAmount> getAmounts()
    {
-      return pairMap.values();
+      return ingredients.values();
+   }
+
+   public Map<Ingredient, IngredientAmount> getIngredientMap()
+   {
+      return ingredients;
    }
 
    public void setName(String name)
@@ -44,11 +49,11 @@ public class Recipe
 
    public void addIngredient(Ingredient ing, IngredientAmount ia)
    {
-      pairMap.put(ing, ia);
+      ingredients.put(ing, ia);
    }
 
    public boolean contains(Ingredient i)
    {
-      return pairMap.containsKey(i);
+      return ingredients.containsKey(i);
    }
 }

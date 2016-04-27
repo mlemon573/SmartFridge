@@ -1,0 +1,20 @@
+<recipe>
+    <recipeName>Hard Boiled Eggs</recipeName>
+    <ingredients>
+        <i>
+            <n>Egg</n>
+            <q>6</q>
+            <u></u>
+        </i>
+    </ingredients>
+    <directions>
+        <d>Place eggs into a saucepan and pour in cold water to cover.</d>
+        <d>Place over high heat.</d>
+        <d>When the water just starts to simmer, turn off heat.</d>
+        <d>Cover pan with a lid, and let stand for 17 minutes.</d>
+        <d>Pour out the hot water and pour cold water over eggs.</d>
+        <d>Drain and refill with cold water.</d>
+        <d>Let stand until eggs are cool, about 20 minutes.</d>
+        <d>Peel eggs under running water.</d>
+    </directions>
+</recipe>
