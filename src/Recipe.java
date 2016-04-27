@@ -1,18 +1,15 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Recipe
 {
    private String name;
    private List<String> directions;
-   private List<Ingredient> ingredients;
-   private List<IngredientAmount> amounts;
+   private Map<Ingredient, IngredientAmount> pairMap;
 
    public Recipe()
    {
       directions = new ArrayList<>();
-      ingredients = new ArrayList<>();
-      amounts = new ArrayList<>();
+      pairMap = new TreeMap<>();
    }
 
    public String getName()
@@ -25,14 +22,14 @@ public class Recipe
       return directions;
    }
 
-   public List<Ingredient> getIngredients()
+   public Set<Ingredient> getIngredients()
    {
-      return ingredients;
+      return pairMap.keySet();
    }
 
-   public List<IngredientAmount> getAmounts()
+   public Collection<IngredientAmount> getAmounts()
    {
-      return amounts;
+      return pairMap.values();
    }
 
    public void setName(String name)
@@ -45,18 +42,13 @@ public class Recipe
       directions.add(content);
    }
 
-   public void addIngredient(Ingredient in)
+   public void addIngredient(Ingredient ing, IngredientAmount ia)
    {
-      ingredients.add(in);
+      pairMap.put(ing, ia);
    }
 
-   public void addAmount(IngredientAmount ia)
+   public boolean contains(Ingredient i)
    {
-      amounts.add(ia);
-   }
-
-   public boolean isValid()
-   {
-      return ingredients.size() == amounts.size();
+      return pairMap.containsKey(i);
    }
 }

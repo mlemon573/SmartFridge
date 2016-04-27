@@ -1,0 +1,35 @@
+<recipe>
+    <recipeName>Baked Zucchini Fries</recipeName>
+    <ingredients>
+        <i>
+            <n>Egg</n>
+            <q>2</q>
+            <u></u>
+        </i>
+        <i>
+            <n>Bread Crumbs</n>
+            <q>.5</q>
+            <u>Cup</u>
+        </i>
+        <i>
+            <n>Parmesan Cheese</n>
+            <q>.25</q>
+            <u>Cup</u>
+        </i>
+        <i>
+            <n>Zucchini</n>
+            <q>3</q>
+            <u></u>
+        </i>
+    </ingredients>
+    <directions>
+        <d>Preheat oven to 425 degrees F.</d>
+        <d>Line a baking sheet with aluminum foil and spray with cooking spray.</d>
+        <d>Stir bread crumbs and Parmesan cheese together in a shallow bowl.</d>
+        <d>Whisk eggs in a separate shallow bowl.</d>
+        <d>Trim ends off zucchinis, cut in half, then cut into half inch strips.</d>
+        <d>Dip zucchini strips into egg mixture, shake to remove excess, and roll strips in bread crumb mixture.</d>
+        <d>Transfer coated zucchini strips to the prepared baking sheet.</d>
+        <d>Bake zucchini fries in the preheated oven, turning once, until golden and crisp, 20 to 24 minutes.</d>
+    </directions>
+</recipe>

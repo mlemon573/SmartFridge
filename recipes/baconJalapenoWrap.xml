@@ -1,0 +1,33 @@
+<recipe>
+    <recipeName>Bacon Jalapeno Wrap</recipeName>
+    <ingredients>
+        <i>
+            <n>Bacon</n>
+            <q>6</q>
+            <u></u>
+        </i>
+        <i>
+            <n>Cream Cheese</n>
+            <q>8</q>
+            <u>Ounce</u>
+        </i>
+        <i>
+            <n>Jalapeno Pepper</n>
+            <q>12</q>
+            <u></u>
+        </i>
+    </ingredients>
+    <directions>
+        <d>Preheat oven to 425 degrees F.</d>
+        <d>Halve and seed jalapeno peppers.</d>
+        <d>Spread cream cheese into jalapeno pepper halves.</d>
+        <d>Wrap each with a piece of bacon.</d>
+        <d>Secure the bacon with toothpicks.</d>
+        <d>Arrange wrapped jalapeno peppers onto a baking sheet with cream cheese side facing down.</d>
+        <d>Preheat an outdoor grill for high heat, and lightly oil the grate.</d>
+        <d>Bake in preheated oven for 10 minutes.</d>
+        <d>Turn and continue cooking until the bacon is completely browned, about 10 minutes.</d>
+        <d>Transfer jalapeno wraps to preheated grill.</d>
+        <d>Cook until the bacon is crisp, 2 to 3 minutes per side.</d>
+    </directions>
+</recipe>

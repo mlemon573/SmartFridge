@@ -9,17 +9,28 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class RecipeLoader
 {
-   private Set<Recipe> directory;
+   private List<Recipe> directory;
    private DocumentBuilder docBuilder;
 
    public static void main(String[] args)
    {
-      new RecipeLoader("recipes");
+      RecipeLoader recipeLoader = new RecipeLoader("recipes");
+      Map<Integer, Set<Ingredient>> sortedMap =
+            IngredientFrequency.sort(recipeLoader.getDirectory());
+      for (Integer freq : sortedMap.keySet())
+      {
+         for (Ingredient ing : sortedMap.get(freq))
+         {
+            System.out.printf("%s: %d\n", ing.getName(), freq);
+         }
+      }
    }
 
    public RecipeLoader(String path)
@@ -27,7 +38,7 @@ public class RecipeLoader
       DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
       try {docBuilder = dbf.newDocumentBuilder();}
       catch (ParserConfigurationException e) {e.printStackTrace();}
-      directory = new HashSet<>();
+      directory = new ArrayList<>();
       File[] listFiles = new File(path).listFiles();
       if (listFiles == null) {return;}
       for (File f : listFiles)
@@ -61,15 +72,16 @@ public class RecipeLoader
                nNode = nList.item(i);
                if (nNode.getNodeType() != Node.ELEMENT_NODE) {continue;}
                eElement = (Element) nNode;
-               String ingredient =
+               String ingredientName =
                      eElement.getElementsByTagName("n").item(0).getTextContent();
                String quantityText =
                      eElement.getElementsByTagName("q").item(0).getTextContent();
                String unit =
                      eElement.getElementsByTagName("u").item(0).getTextContent();
                double quantity = Double.parseDouble(quantityText);
-               newRecipe.addIngredient(new Ingredient(ingredient));
-               newRecipe.addAmount(new IngredientAmount(quantity, unit));
+               Ingredient ingredient = new Ingredient(ingredientName);
+               IngredientAmount ia = new IngredientAmount(quantity, unit);
+               newRecipe.addIngredient(ingredient, ia);
             }
          }
 
@@ -88,7 +100,7 @@ public class RecipeLoader
       }
    }
 
-   public Set<Recipe> getDirectory()
+   public List<Recipe> getDirectory()
    {
       return directory;
    }
