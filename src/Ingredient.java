@@ -13,6 +13,12 @@ public class Ingredient implements Comparable<Ingredient>
    }
 
    @Override
+   public String toString()
+   {
+      return getName();
+   }
+
+   @Override
    public int compareTo(Ingredient o)
    {
       return name.compareTo(o.getName());

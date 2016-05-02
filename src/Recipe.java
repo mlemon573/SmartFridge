@@ -56,4 +56,21 @@ public class Recipe
    {
       return ingredients.containsKey(i);
    }
+
+   public boolean isPossible(List<Ingredient> selectedIngredients)
+   {
+      int matches = 0;
+      for (Ingredient i : selectedIngredients)
+      {
+         if (contains(i)) {matches++;}
+         if (matches == ingredients.size()) {return true;}
+      }
+      return false;
+   }
+
+   @Override
+   public String toString()
+   {
+      return getName();
+   }
 }
