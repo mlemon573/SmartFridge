@@ -1,5 +1,8 @@
 <recipe>
     <recipeName>Hard Boiled Eggs</recipeName>
+    <courses>
+        <c>Side</c>
+    </courses>
     <ingredients>
         <i>
             <n>Egg</n>

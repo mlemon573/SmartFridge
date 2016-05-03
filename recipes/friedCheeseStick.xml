@@ -1,5 +1,8 @@
 <recipe>
     <recipeName>Fried Cheese Stick</recipeName>
+    <courses>
+        <c>Appetizer</c>
+    </courses>
     <ingredients>
         <i>
             <n>String Cheese</n>

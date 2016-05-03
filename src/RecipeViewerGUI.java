@@ -87,27 +87,28 @@ public class RecipeViewerGUI
    {
       createUIComponents();
       recipeViewerPanel = new JPanel();
-      recipeViewerPanel.setLayout(new GridLayoutManager(7, 3, new Insets(0, 0, 0,
-            0), -1, -1));
+      recipeViewerPanel.setLayout(new GridLayoutManager(7, 3, new Insets(10, 10,
+            10, 10), -1, -1));
       final Spacer spacer1 = new Spacer();
       recipeViewerPanel.add(spacer1, new GridConstraints(1, 2, 5, 1,
             GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
-            GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), null,
-            null, 0, false));
+            GridConstraints.SIZEPOLICY_CAN_SHRINK
+                  | GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, new Dimension
+            (25, -1), null, 0, false));
       final Spacer spacer2 = new Spacer();
       recipeViewerPanel.add(spacer2, new GridConstraints(1, 0, 5, 1,
             GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
-            GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), null,
-            null, 0, false));
+            GridConstraints.SIZEPOLICY_CAN_SHRINK
+                  | GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, new Dimension
+            (25, -1), null, 0, false));
       final Spacer spacer3 = new Spacer();
       recipeViewerPanel.add(spacer3, new GridConstraints(0, 0, 1, 3,
             GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1,
-            GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 10), null,
-            null, 0, false));
+            GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
       final Spacer spacer4 = new Spacer();
       recipeViewerPanel.add(spacer4, new GridConstraints(6, 0, 1, 3,
             GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1,
-            GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 10), null,
+            GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(-1, 25),
             null, 0, false));
       recipeName = new JLabel();
       recipeName.setEnabled(true);

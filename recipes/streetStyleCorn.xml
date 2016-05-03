@@ -1,5 +1,8 @@
 <recipe>
     <recipeName>Street Style Corn on the Cob</recipeName>
+    <courses>
+        <c>Appetizer</c>
+    </courses>
     <ingredients>
         <i>
             <n>Corn</n>

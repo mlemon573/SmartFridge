@@ -1,5 +1,8 @@
 <recipe>
     <recipeName>Bacon Jalapeno Wrap</recipeName>
+    <courses>
+        <c>Appetizer</c>
+    </courses>
     <ingredients>
         <i>
             <n>Bacon</n>

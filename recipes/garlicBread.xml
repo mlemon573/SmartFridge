@@ -1,5 +1,8 @@
 <recipe>
     <recipeName>Cheesy Garlic Bread</recipeName>
+    <courses>
+        <c>Side</c>
+    </courses>
     <ingredients>
         <i>
             <n>French Bread</n>

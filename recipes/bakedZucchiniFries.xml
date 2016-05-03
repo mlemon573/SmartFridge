@@ -1,5 +1,8 @@
 <recipe>
     <recipeName>Baked Zucchini Fries</recipeName>
+    <courses>
+        <c>Appetizer</c>
+    </courses>
     <ingredients>
         <i>
             <n>Egg</n>

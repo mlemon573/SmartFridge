@@ -2,13 +2,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,9 +29,9 @@ public class RecipeLoader
       }
    }
 
-   private void parseRecipe(File input) throws NumberFormatException,
-         SAXException, IOException
+   private void parseRecipe(File input) throws Exception
    {
+      Exception e = new Exception("malformed recipe in " + input.getName());
       Recipe newRecipe = new Recipe();
       Document doc = docBuilder.parse(input);
       doc.getDocumentElement().normalize();
@@ -44,13 +42,31 @@ public class RecipeLoader
          Element eElement;
 
          pNode = doc.getElementsByTagName("recipeName").item(0);
-         String name = pNode.getTextContent();
-         newRecipe.setName(name);
+         if (pNode != null)
+         {
+            String name = pNode.getTextContent();
+            newRecipe.setName(name);
+         }
+         else {throw e;}
+
+         pNode = doc.getElementsByTagName("courses").item(0);
+         if (pNode != null && pNode.getNodeType() == Node.ELEMENT_NODE)
+         {
+            nList = ((Element) pNode).getElementsByTagName("c");
+            if (nList.getLength() == 0) {throw e;}
+            for (int i = 0; i < nList.getLength(); i++)
+            {
+               String course = nList.item(i).getTextContent();
+               //newRecipe.addCourse(course);
+            }
+         }
+         else {throw e;}
 
          pNode = doc.getElementsByTagName("ingredients").item(0);
-         if (pNode.getNodeType() == Node.ELEMENT_NODE)
+         if (pNode != null && pNode.getNodeType() == Node.ELEMENT_NODE)
          {
             nList = ((Element) pNode).getElementsByTagName("i");
+            if (nList.getLength() == 0) {throw e;}
             for (int i = 0; i < nList.getLength(); i++)
             {
                nNode = nList.item(i);
@@ -68,17 +84,20 @@ public class RecipeLoader
                newRecipe.addIngredient(ingredient, ia);
             }
          }
+         else {throw e;}
 
          pNode = doc.getElementsByTagName("directions").item(0);
-         if (pNode.getNodeType() == Node.ELEMENT_NODE)
+         if (pNode != null && pNode.getNodeType() == Node.ELEMENT_NODE)
          {
             nList = ((Element) pNode).getElementsByTagName("d");
+            if (nList.getLength() == 0) {throw e;}
             for (int i = 0; i < nList.getLength(); i++)
             {
                String direction = nList.item(i).getTextContent();
                newRecipe.addDirection(direction);
             }
          }
+         else {throw e;}
 
          directory.add(newRecipe);
       }

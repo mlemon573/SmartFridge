@@ -1,5 +1,9 @@
 <recipe>
     <recipeName>Breaded Shrimp</recipeName>
+    <courses>
+        <c>Appetizer</c>
+        <c>Side</c>
+    </courses>
     <ingredients>
         <i>
             <n>Vegetable Oil</n>

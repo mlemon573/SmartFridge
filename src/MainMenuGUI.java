@@ -72,53 +72,54 @@ public class MainMenuGUI
    {
       createUIComponents();
       menuPanel = new JPanel();
-      menuPanel.setLayout(new GridLayoutManager(5, 4, new Insets(0, 0, 0, 0), -1,
-            -1));
+      menuPanel.setLayout(new GridLayoutManager(4, 4, new Insets(10, 10, 10, 10),
+            -1, -1));
       logoLabel = new JLabel();
       logoLabel.setFont(new Font(logoLabel.getFont().getName(), logoLabel.getFont
             ().getStyle(), 24));
       logoLabel.setText("Smart Fridge");
-      menuPanel.add(logoLabel, new GridConstraints(1, 1, 1, 2, GridConstraints
+      menuPanel.add(logoLabel, new GridConstraints(0, 1, 1, 2, GridConstraints
             .ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints
             .SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null,
             0, false));
       final JLabel label1 = new JLabel();
       label1.setText("Ingredients");
-      menuPanel.add(label1, new GridConstraints(2, 1, 1, 1, GridConstraints
+      menuPanel.add(label1, new GridConstraints(1, 1, 1, 1, GridConstraints
             .ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints
             .SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null,
             0, false));
       final Spacer spacer1 = new Spacer();
-      menuPanel.add(spacer1, new GridConstraints(1, 0, 3, 1, GridConstraints
-            .ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints
-            .SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), null, null, 0, false));
+      menuPanel.add(spacer1, new GridConstraints(0, 0, 3, 1, GridConstraints
+            .ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
+            GridConstraints.SIZEPOLICY_CAN_SHRINK
+                  | GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, new Dimension
+            (25, -1), null, 0, false));
       final Spacer spacer2 = new Spacer();
-      menuPanel.add(spacer2, new GridConstraints(1, 3, 3, 1, GridConstraints
-            .ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints
-            .SIZEPOLICY_WANT_GROW, 1, new Dimension(10, -1), null, null, 0, false));
+      menuPanel.add(spacer2, new GridConstraints(0, 3, 3, 1, GridConstraints
+            .ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
+            GridConstraints.SIZEPOLICY_CAN_SHRINK
+                  | GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, new Dimension
+            (25, -1), null, 0, false));
       final Spacer spacer3 = new Spacer();
-      menuPanel.add(spacer3, new GridConstraints(4, 0, 1, 4, GridConstraints
+      menuPanel.add(spacer3, new GridConstraints(3, 0, 1, 4, GridConstraints
             .ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints
-            .SIZEPOLICY_WANT_GROW, new Dimension(-1, 10), null, null, 0, false));
-      final Spacer spacer4 = new Spacer();
-      menuPanel.add(spacer4, new GridConstraints(0, 0, 1, 4, GridConstraints
-            .ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints
-            .SIZEPOLICY_WANT_GROW, new Dimension(-1, 10), null, null, 0, false));
+            .SIZEPOLICY_WANT_GROW, null, new Dimension(-1, 25), null, 0, false));
       findButton = new JButton();
       findButton.setText("Find Recipes");
-      menuPanel.add(findButton, new GridConstraints(3, 2, 1, 1, GridConstraints
+      menuPanel.add(findButton, new GridConstraints(2, 2, 1, 1, GridConstraints
             .ANCHOR_EAST, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_CAN_SHRINK
                   | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints
             .SIZEPOLICY_FIXED, null, null, null, 0, false));
       final JScrollPane scrollPane1 = new JScrollPane();
-      menuPanel.add(scrollPane1, new GridConstraints(2, 2, 1, 1, GridConstraints
+      menuPanel.add(scrollPane1, new GridConstraints(1, 2, 1, 1, GridConstraints
             .ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints
             .SIZEPOLICY_FIXED,
             GridConstraints.SIZEPOLICY_CAN_SHRINK
                   | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0,
             false));
       ingredientJList.setLayoutOrientation(0);
+      ingredientJList.setVisibleRowCount(10);
       scrollPane1.setViewportView(ingredientJList);
    }
 
