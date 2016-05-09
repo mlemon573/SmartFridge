@@ -18,6 +18,7 @@
           <component id="372c6" class="javax.swing.JList" binding="recipeJList" custom-create="true">
             <constraints/>
             <properties>
+              <fixedCellWidth value="200"/>
               <layoutOrientation value="0"/>
               <selectionMode value="2"/>
               <visible value="true"/>

@@ -12,11 +12,18 @@ import java.util.Map;
 public class RecipeViewerGUI
 {
    public JPanel recipeViewerPanel;
+   private Recipe recipe;
    private JLabel recipeName;
    private JPanel ingredientPanel;
    private JPanel directionPanel;
+   private JLabel recipeImage;
 
-   Recipe recipe;
+   public RecipeViewerGUI(Recipe recipe)
+   {
+      this.recipe = recipe;
+      $$$setupUI$$$();
+      recipeName.setText(recipe.toString());
+   }
 
    /**
     * Creates JFrame that contains the recipe
@@ -27,7 +34,7 @@ public class RecipeViewerGUI
 
       JTabbedPane tabbedPane = new JTabbedPane();
       for (Recipe r : recipeList)
-      {tabbedPane.addTab(r.getName(), new RecipeViewerGUI(r).recipeViewerPanel);}
+      {tabbedPane.addTab(r.toString(), new RecipeViewerGUI(r).recipeViewerPanel);}
 
       frame.setContentPane(tabbedPane);
       frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -36,15 +43,13 @@ public class RecipeViewerGUI
       frame.setVisible(true);
    }
 
-   public RecipeViewerGUI(Recipe recipe)
-   {
-      this.recipe = recipe;
-      $$$setupUI$$$();
-      recipeName.setText(recipe.getName());
-   }
-
    private void createUIComponents()
    {
+      try
+      {
+         recipeImage = new JLabel();
+      }
+      catch (Exception e) {e.printStackTrace();}
       ingredientPanel = new JPanel();
       Map<Ingredient, IngredientAmount> ingredientMap = recipe.getIngredientMap();
       ingredientPanel.setLayout(new GridBagLayout());
@@ -61,7 +66,7 @@ public class RecipeViewerGUI
          c.gridx = c.gridx + 1;
          ingredientPanel.add(new JLabel(ia.getUnit()), c);
          c.gridx = c.gridx + 1;
-         ingredientPanel.add(new JLabel(i.getName()), c);
+         ingredientPanel.add(new JLabel(i.toString()), c);
          c.gridy = c.gridy + 1;
       }
       List<String> directions = recipe.getDirections();
@@ -87,26 +92,26 @@ public class RecipeViewerGUI
    {
       createUIComponents();
       recipeViewerPanel = new JPanel();
-      recipeViewerPanel.setLayout(new GridLayoutManager(7, 3, new Insets(10, 10,
+      recipeViewerPanel.setLayout(new GridLayoutManager(8, 5, new Insets(10, 10,
             10, 10), -1, -1));
       final Spacer spacer1 = new Spacer();
-      recipeViewerPanel.add(spacer1, new GridConstraints(1, 2, 5, 1,
+      recipeViewerPanel.add(spacer1, new GridConstraints(1, 4, 6, 1,
             GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
             GridConstraints.SIZEPOLICY_CAN_SHRINK
                   | GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, new Dimension
             (25, -1), null, 0, false));
       final Spacer spacer2 = new Spacer();
-      recipeViewerPanel.add(spacer2, new GridConstraints(1, 0, 5, 1,
+      recipeViewerPanel.add(spacer2, new GridConstraints(1, 0, 6, 1,
             GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
             GridConstraints.SIZEPOLICY_CAN_SHRINK
                   | GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, new Dimension
             (25, -1), null, 0, false));
       final Spacer spacer3 = new Spacer();
-      recipeViewerPanel.add(spacer3, new GridConstraints(0, 0, 1, 3,
+      recipeViewerPanel.add(spacer3, new GridConstraints(0, 0, 1, 5,
             GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1,
             GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
       final Spacer spacer4 = new Spacer();
-      recipeViewerPanel.add(spacer4, new GridConstraints(6, 0, 1, 3,
+      recipeViewerPanel.add(spacer4, new GridConstraints(7, 0, 1, 5,
             GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1,
             GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(-1, 25),
             null, 0, false));
@@ -115,7 +120,7 @@ public class RecipeViewerGUI
       recipeName.setFont(new Font(recipeName.getFont().getName(), recipeName
             .getFont().getStyle(), 24));
       recipeName.setText("");
-      recipeViewerPanel.add(recipeName, new GridConstraints(1, 1, 1, 1,
+      recipeViewerPanel.add(recipeName, new GridConstraints(1, 2, 1, 1,
             GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED,
             null, null, null, 0, false));
@@ -123,11 +128,11 @@ public class RecipeViewerGUI
       label1.setFont(new Font(label1.getFont().getName(), label1.getFont()
             .getStyle(), 18));
       label1.setText("Ingredients");
-      recipeViewerPanel.add(label1, new GridConstraints(2, 1, 1, 1,
+      recipeViewerPanel.add(label1, new GridConstraints(3, 2, 1, 1,
             GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED,
             null, null, null, 0, false));
-      recipeViewerPanel.add(ingredientPanel, new GridConstraints(3, 1, 1, 1,
+      recipeViewerPanel.add(ingredientPanel, new GridConstraints(4, 2, 1, 1,
             GridConstraints.ANCHOR_WEST, GridConstraints.FILL_VERTICAL,
             GridConstraints.SIZEPOLICY_CAN_SHRINK
                   | GridConstraints.SIZEPOLICY_CAN_GROW,
@@ -138,17 +143,31 @@ public class RecipeViewerGUI
       label2.setFont(new Font(label2.getFont().getName(), label2.getFont()
             .getStyle(), 18));
       label2.setText("Directions");
-      recipeViewerPanel.add(label2, new GridConstraints(4, 1, 1, 1,
+      recipeViewerPanel.add(label2, new GridConstraints(5, 2, 1, 1,
             GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
             GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED,
             null, null, null, 0, false));
-      recipeViewerPanel.add(directionPanel, new GridConstraints(5, 1, 1, 1,
+      recipeViewerPanel.add(directionPanel, new GridConstraints(6, 2, 1, 1,
             GridConstraints.ANCHOR_WEST, GridConstraints.FILL_VERTICAL,
             GridConstraints.SIZEPOLICY_CAN_SHRINK
                   | GridConstraints.SIZEPOLICY_CAN_GROW,
             GridConstraints.SIZEPOLICY_CAN_SHRINK
                   | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0,
             false));
+      final Spacer spacer5 = new Spacer();
+      recipeViewerPanel.add(spacer5, new GridConstraints(3, 3, 4, 1,
+            GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
+            GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+      final Spacer spacer6 = new Spacer();
+      recipeViewerPanel.add(spacer6, new GridConstraints(3, 1, 4, 1,
+            GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL,
+            GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+      recipeImage.setDoubleBuffered(false);
+      recipeImage.setText("");
+      recipeViewerPanel.add(recipeImage, new GridConstraints(2, 1, 1, 3,
+            GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
+            GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED,
+            null, new Dimension(300, 300), new Dimension(300, 300), 0, false));
    }
 
    /** @noinspection ALL */

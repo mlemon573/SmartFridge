@@ -12,11 +12,6 @@ public class Recipe
       ingredients = new TreeMap<>();
    }
 
-   public String getName()
-   {
-      return name;
-   }
-
    public List<String> getDirections()
    {
       return directions;
@@ -71,6 +66,6 @@ public class Recipe
    @Override
    public String toString()
    {
-      return getName();
+      return name;
    }
 }

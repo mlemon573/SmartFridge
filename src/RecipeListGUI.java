@@ -4,6 +4,8 @@ import com.intellij.uiDesigner.core.Spacer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
 
 public class RecipeListGUI
@@ -13,6 +15,45 @@ public class RecipeListGUI
    private JButton viewButton;
 
    private List<Recipe> recipeList;
+
+   public RecipeListGUI(List<Recipe> recipeList)
+   {
+      this.recipeList = recipeList;
+      $$$setupUI$$$();
+      recipeJList.addKeyListener(new KeyListener()
+      {
+         @Override
+         public void keyTyped(KeyEvent e) {}
+
+         @Override
+         public void keyPressed(KeyEvent e) {}
+
+         @Override
+         public void keyReleased(KeyEvent e)
+         {
+            if (e.getKeyCode() == KeyEvent.VK_ENTER)
+            {RecipeViewerGUI.createFrame(recipeJList.getSelectedValuesList());}
+         }
+      });
+      viewButton.addActionListener(e -> {
+         RecipeViewerGUI.createFrame(recipeJList.getSelectedValuesList());
+      });
+      viewButton.addKeyListener(new KeyListener()
+      {
+         @Override
+         public void keyTyped(KeyEvent e) {}
+
+         @Override
+         public void keyPressed(KeyEvent e) {}
+
+         @Override
+         public void keyReleased(KeyEvent e)
+         {
+            if (e.getKeyCode() == KeyEvent.VK_ENTER)
+            {RecipeViewerGUI.createFrame(recipeJList.getSelectedValuesList());}
+         }
+      });
+   }
 
    /**
     * Creates JFrame that contains the list of possible recipes
@@ -25,15 +66,6 @@ public class RecipeListGUI
       frame.pack();
       frame.setLocationRelativeTo(null);
       frame.setVisible(true);
-   }
-
-   public RecipeListGUI(List<Recipe> recipeList)
-   {
-      this.recipeList = recipeList;
-      $$$setupUI$$$();
-      viewButton.addActionListener(e -> {
-         RecipeViewerGUI.createFrame(recipeJList.getSelectedValuesList());
-      });
    }
 
    private void createUIComponents()
@@ -61,6 +93,7 @@ public class RecipeListGUI
             GridConstraints.SIZEPOLICY_CAN_SHRINK
                   | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0,
             false));
+      recipeJList.setFixedCellWidth(200);
       recipeJList.setLayoutOrientation(0);
       recipeJList.setSelectionMode(2);
       recipeJList.setVisible(true);
