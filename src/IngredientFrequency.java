@@ -1,7 +1,18 @@
 import java.util.*;
 
+/**
+ * Class containing static method(s) relating to the frequency with which
+ * ingredients occur
+ */
 public class IngredientFrequency
 {
+   /**
+    * Loops through a recipeList and determines which ingredients occur and with
+    * what frequency they occur.
+    *
+    * @param recipeList recipes used to determine ingredients
+    * @return Map sorted by frequency of ingredients
+    */
    public static Map<Integer, Set<Ingredient>> getSortedMap(List<Recipe> recipeList)
    {
       Map<Ingredient, Integer> ingredientFrequencyMap = new TreeMap<>();

@@ -8,6 +8,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
 
+/**
+ * The next window of the application after MainMenuGUI, allows the user to select
+ * which recipes they would like to view
+ */
 public class RecipeListGUI
 {
    private JPanel recipeListPanel;
@@ -16,10 +20,17 @@ public class RecipeListGUI
 
    private List<Recipe> recipeList;
 
+   /**
+    * Constructor method for RecipeListGUI
+    *
+    * @param recipeList the list of possible recipes
+    */
    public RecipeListGUI(List<Recipe> recipeList)
    {
       this.recipeList = recipeList;
+
       $$$setupUI$$$();
+
       recipeJList.addKeyListener(new KeyListener()
       {
          @Override
@@ -57,6 +68,8 @@ public class RecipeListGUI
 
    /**
     * Creates JFrame that contains the list of possible recipes
+    *
+    * @param recipeList the list of possible recipes
     */
    public static void createFrame(List<Recipe> recipeList)
    {
@@ -68,6 +81,9 @@ public class RecipeListGUI
       frame.setVisible(true);
    }
 
+   /**
+    * Creates components that are too complex to simply add
+    */
    private void createUIComponents()
    {
       DefaultListModel<Recipe> recipeJListModel = new DefaultListModel<>();

@@ -7,6 +7,7 @@ public class Ingredient implements Comparable<Ingredient>
 
    /**
     * Constructor method for Ingredient
+    *
     * @param name given name
     */
    public Ingredient(String name)
@@ -16,6 +17,7 @@ public class Ingredient implements Comparable<Ingredient>
 
    /**
     * Returns the name of the object
+    *
     * @return a string representation of the object.
     */
    @Override
@@ -26,6 +28,7 @@ public class Ingredient implements Comparable<Ingredient>
 
    /**
     * Compares this object with the specified object for order
+    *
     * @param o the ingredient to be compared.
     * @return the comparison of the names
     */

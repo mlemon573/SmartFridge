@@ -1,16 +1,24 @@
+/**
+ * Represents a pair of the amount and the unit for a fully qualified ingredient
+ * in a recipe
+ */
 public class IngredientAmount
 {
-   private double quantity;
-   private String unit;
-
    private static final String[] VOLUME_MEASUREMENTS = {
          "MILLILITER", "TEASPOON", "TABLESPOON", "OUNCE", "CUP", "PINT", "QUART",
          "LITER", "GALLON"
    };
-
    private static final double[] VOLUME_CONVERSIONS =
          {1, 4.929, 14.787, 29.574, 240, 473.176, 946.353, 1000, 3785.41};
+   private double quantity;
+   private String unit;
 
+   /**
+    * Constructor method for IngredientAmount
+    *
+    * @param quantity amount of ingredient
+    * @param unit     unit of ingredient (ie "ounce", "cup", "pint", ect.)
+    */
    public IngredientAmount(double quantity, String unit)
    {
       this.quantity = quantity;
@@ -18,11 +26,21 @@ public class IngredientAmount
       convertUnits();
    }
 
+   /**
+    * Accessor method to get the quantity of the ingredient
+    *
+    * @return amount of ingredient
+    */
    public double getQuantity()
    {
       return quantity;
    }
 
+   /**
+    * Accessor method to get ingredient unit
+    *
+    * @return unit type of the ingredient
+    */
    public String getUnit()
    {
       return unit;

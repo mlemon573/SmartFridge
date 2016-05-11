@@ -14,6 +14,10 @@ import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
+/**
+ * The main menu for the application, in charge of displaying ingredient list and
+ * allowing selection of ingredients in one's fridge (or pantry)
+ */
 public class MainMenuGUI
 {
    private JPanel menuPanel;
@@ -30,16 +34,19 @@ public class MainMenuGUI
    private DefaultListModel<Ingredient> selectIngredientModel;
    private DefaultListModel<Ingredient> allIngredientModel;
 
-   public MainMenuGUI()
+   /**
+    * Constructor method for MainMenuGUI
+    *
+    * @param recipeList the list of possible recipes
+    */
+   public MainMenuGUI(List<Recipe> recipeList)
    {
-      RecipeLoader recipeLoader = new RecipeLoader("recipes");
-      recipeList = recipeLoader.getDirectory();
+      this.recipeList = recipeList;
       undoStack = new Stack<>();
       redoStack = new Stack<>();
 
       $$$setupUI$$$();
 
-      // add action listeners
       findButton.addActionListener(e -> {
          selectIngredientJList.setSelectionInterval(0,
                selectIngredientModel.size() - 1);
@@ -109,22 +116,29 @@ public class MainMenuGUI
 
    public static void main(String[] args)
    {
-      MainMenuGUI.createFrame();
+      RecipeLoader recipeLoader = new RecipeLoader("recipes");
+      List<Recipe> recipeList = recipeLoader.getDirectory();
+      MainMenuGUI.createFrame(recipeList);
    }
 
    /**
     * Creates JFrame that contains the main menu
+    *
+    * @param recipeList the list of possible recipes
     */
-   public static void createFrame()
+   public static void createFrame(List<Recipe> recipeList)
    {
       JFrame frame = new JFrame();
-      frame.setContentPane(new MainMenuGUI().menuPanel);
+      frame.setContentPane(new MainMenuGUI(recipeList).menuPanel);
       frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
       frame.pack();
       frame.setLocationRelativeTo(null);
       frame.setVisible(true);
    }
 
+   /**
+    * Moves an Ingredient from all ingredients to selected ingredients
+    */
    private void selectIngredient()
    {
       List<Ingredient> tempList = allIngredientJList.getSelectedValuesList();
@@ -139,17 +153,34 @@ public class MainMenuGUI
       allIngredientJList.setSelectedIndex(index);
    }
 
+   /**
+    * Undoes the last choice made
+    */
    private void undoChoice()
    {
       doChoice(undoStack, redoStack, selectIngredientModel, allIngredientModel);
    }
 
+   /**
+    * Redoes the last choice undone
+    */
    private void redoChoice()
    {
       doChoice(redoStack, undoStack, allIngredientModel, selectIngredientModel);
    }
 
-   private void doChoice(Stack<Ingredient> fromStack, Stack<Ingredient> toStack, DefaultListModel<Ingredient> fromModel, DefaultListModel<Ingredient> toModel)
+   /**
+    * Helper method that transfers an element from the fromStack to the toStack,
+    * as well as removing it from the fromModel and adding it to the toModel
+    *
+    * @param fromStack Stack of Ingredient objects to remove an element from
+    * @param toStack   Stack of Ingredient objects to add an element to
+    * @param fromModel DefaultListModel to remove an element from
+    * @param toModel   DefaultListModel to add an element to
+    */
+   private void doChoice(Stack<Ingredient> fromStack, Stack<Ingredient> toStack,
+                         DefaultListModel<Ingredient> fromModel,
+                         DefaultListModel<Ingredient> toModel)
    {
       if (!fromStack.isEmpty())
       {
@@ -160,6 +191,9 @@ public class MainMenuGUI
       }
    }
 
+   /**
+    * Creates components that are too complex to simply add
+    */
    private void createUIComponents()
    {
       Map<Integer, Set<Ingredient>> sortedMap =

@@ -10,11 +10,19 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Loads all valid recipes from a given folder
+ */
 public class RecipeLoader
 {
    private List<Recipe> directory;
    private DocumentBuilder docBuilder;
 
+   /**
+    * Constructor method for RecipeLoader
+    *
+    * @param path relative path to search under to find recipes
+    */
    public RecipeLoader(String path)
    {
       DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -29,6 +37,13 @@ public class RecipeLoader
       }
    }
 
+   /**
+    * Parses through a given File to extract a valid recipe
+    *
+    * @param input File object to search through
+    * @throws Exception if there is an issue when parsing through the recipe, such
+    *                   as if key components are missing
+    */
    private void parseRecipe(File input) throws Exception
    {
       Exception e = new Exception("malformed recipe in " + input.getName());
@@ -46,19 +61,6 @@ public class RecipeLoader
          {
             String name = pNode.getTextContent();
             newRecipe.setName(name);
-         }
-         else {throw e;}
-
-         pNode = doc.getElementsByTagName("courses").item(0);
-         if (pNode != null && pNode.getNodeType() == Node.ELEMENT_NODE)
-         {
-            nList = ((Element) pNode).getElementsByTagName("c");
-            if (nList.getLength() == 0) {throw e;}
-            for (int i = 0; i < nList.getLength(); i++)
-            {
-               String course = nList.item(i).getTextContent();
-               //newRecipe.addCourse(course);
-            }
          }
          else {throw e;}
 
@@ -103,6 +105,11 @@ public class RecipeLoader
       }
    }
 
+   /**
+    * Accessor method to get the list of valid recipes
+    *
+    * @return List of recipes
+    */
    public List<Recipe> getDirectory()
    {
       return directory;
